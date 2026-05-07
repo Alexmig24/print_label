@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="print_label.ListProducts.header">
+    <div class="d-flex flex-column p-2 gap-2">
+        <!-- Primera fila -->
+        <div class="row d-flex align-items-center justify-content-between">
+            <!-- Boton de generar PDF + selector de plantilla -->
+            <div class="order-1 order-md-0 col-md-auto col-6 mb-2 mb-md-0 d-flex align-items-center gap-2">
+                <button class="btn btn-primary"
+                        t-on-click="generatePdf"
+                        t-att-disabled="!Object.keys(state.productSelected).length || state.generatingPdf || !state.templateId">
+                    Generar
+                    <i t-if="!state.generatingPdf" class="fa fa-file-pdf-o me-2"/>
+                    <i t-else="" class="fa fa-spinner fa-spin me-2"/>
+                </button>
+                <div t-if="selectedLength &gt; 0">
+                    <button class="btn btn-secondary" t-on-click="unSelectAll">
+                        Deseleccionar (<strong t-esc="selectedLength"/>)
+                    </button>
+                </div>
+            </div>
+            <!-- Buscador -->
+            <div class="order-0 order-md-1 col-md-6 col-12 mb-2 mb-md-0">
+                <div class="input-group">
+                    <span class="input-group-text bg-white">
+                        <i class="fa fa-search text-muted"/>
+                    </span>
+                    <input type="text"
+                        class="form-control border-start-0 bg-light"
+                        placeholder="Buscar por nombre, referencia o categoría..."
+                        t-model="state.searchTerm"
+                        t-on-input="onSearchInput"/>
+                    <button t-if="state.searchTerm"
+                            class="btn btn-outline-secondary"
+                            type="button"
+                            t-on-click="clearSearch">
+                        <i class="fa fa-times"/>
+                    </button>
+                </div>
+                <small class="text-muted ms-2" t-if="state.searchTerm">
+                    Mostrando resultados para: "<strong t-esc="state.searchTerm"/>"
+                </small>
+            </div>
+            <!-- Paginacion -->
+            <div class="order-2 col-md-auto col-6 px-1">
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                    <div class="text-muted">
+                        <strong t-esc="state.currentPage"/> / <strong t-esc="state.totalPages"/>
+                    </div>
+                    <nav>
+                        <ul class="pagination mb-0">
+                            <li class="page-item" t-att-class="{'disabled': state.currentPage === 1}">
+                                <a class="page-link" href="#" t-on-click.prevent="prevPage">
+                                    <i class="fa fa-chevron-left"/>
+                                </a>
+                            </li>
+                            <t t-set="startPage" t-value="Math.max(1, state.currentPage - 2)"/>
+                            <t t-set="endPage" t-value="Math.min(state.totalPages, state.currentPage + 2)"/>
+                            <li t-if="startPage > 1" class="page-item disabled">
+                                <span class="page-link">...</span>
+                            </li>
+                            <li t-if="endPage &lt; state.totalPages" class="page-item disabled">
+                                <span class="page-link">...</span>
+                            </li>
+                            <li class="page-item" t-att-class="{'disabled': state.currentPage === state.totalPages}">
+                                <a class="page-link" href="#" t-on-click.prevent="nextPage">
+                                    <i class="fa fa-chevron-right"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</t>
+
+</templates>

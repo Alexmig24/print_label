@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="print_label.ListProducts">
+        <div class="list_products d-flex flex-column h-100 overflow-hidden">
+            <!-- Header -->
+            <t t-call="print_label.ListProducts.header"/>
+
+            <div class="d-flex overflow-y-auto h-100">
+                <div class="products-column p-3 overflow-y-scroll w-100 h-100">
+
+                    <div t-if="state.loading" class="d-flex flex-column justify-content-center align-items-center py-5 h-100">
+                        <i class="fa fa-spinner fa-spin fa-3x text-primary"/>
+                        <p class="mt-3">Cargando productos...</p>
+                    </div>
+
+                    <div t-else="">
+                        <div class="products-grid">
+                            <t t-foreach="state.products" t-as="product" t-key="product.id">
+                                <Product product="product"
+                                         productSelected="state.productSelected[product.id]"
+                                         onPrintChange="this.onProductPrintChange.bind(this)"
+                                         t-on-click="()=>this.onClickProduct(product)"/>
+                            </t>
+                        </div>
+
+                        <div t-if="state.products.length === 0" class="text-center py-5">
+                            <i class="fa fa-inbox fa-3x text-muted mb-3"/>
+                            <p class="text-muted">No hay productos disponibles</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF Preview -->
+                <t t-call="print_label.ListProducts.pdf_preview"/>
+            </div>
+
+        </div>
+    </t>
+</templates>
