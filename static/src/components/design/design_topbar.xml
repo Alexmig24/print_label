@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="print_label.design.topbar">
+    <div class="d-flex align-items-center gap-2 px-3 py-2 border-bottom bg-100 shadow-sm">
+
+        <span class="fw-semibold text-muted small me-2">
+            DISEÑADOR DE ETIQUETAS
+        </span>
+
+        <div class="vr"/>
+
+        <button class="btn btn-sm btn-outline-secondary" t-on-click="addText">
+            <i class="fa fa-font me-1"/>Texto
+        </button>
+
+        <div class="vr"/>
+
+        <button class="btn btn-sm btn-outline-secondary"
+            t-att-disabled="!state.selected"
+            t-on-click="duplicate">
+            <i class="fa fa-copy me-1"/>Duplicar
+        </button>
+
+        <button class="btn btn-sm btn-outline-danger"
+            t-att-disabled="!state.selected"
+            t-on-click="deleteObject">
+            <i class="fa fa-trash"/>
+        </button>
+
+        <div class="ms-auto d-flex align-items-center gap-1">
+
+            <span t-if="state.currentTemplateName" class="badge bg-secondary me-2">
+                <i class="fa fa-file-text-o me-1"/><t t-esc="state.currentTemplateName"/>
+            </span>
+
+            <button class="btn btn-sm btn-outline-info"
+                t-att-disabled="!state.sampleProduct"
+                t-on-click="previewWithSample"
+                title="Rellena el canvas con datos del primer producto">
+                <i class="fa fa-eye me-1"/>Preview
+            </button>
+
+            <button class="btn btn-sm btn-outline-secondary"
+                t-att-disabled="!state.sampleProduct"
+                t-on-click="resetPlaceholders"
+                title="Vuelve a mostrar los placeholders">
+                <i class="fa fa-undo me-1"/>Reset
+            </button>
+
+            <div class="vr"/>
+
+            <t t-call="print_label.design.template_menu"/>
+
+            <!-- Save buttons -->
+            <button class="btn btn-sm btn-primary"
+                t-att-disabled="state.savingTemplate"
+                t-on-click="updateCurrentTemplate">
+                <i class="fa fa-floppy-o me-1"/>
+                <t t-if="state.currentTemplateId">Guardar</t>
+                <t t-else="">Guardar como...</t>
+            </button>
+
+            <button t-if="state.currentTemplateId"
+                class="btn btn-sm btn-outline-primary"
+                t-att-disabled="state.savingTemplate"
+                t-on-click="saveAsNewTemplate">
+                <i class="fa fa-plus me-1"/>Guardar como...
+            </button>
+
+        </div>
+
+    </div>
+</t>
+
+</templates>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="print_label.design.text_props">
+    <t t-if="state.selectedType === 'i-text'">
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">Tamaño de fuente</div>
+            <input type="number" class="form-control form-control-sm" t-att-value="state.fontSize" t-on-input="(ev) => this.setFontSize(ev.target.value)" min="6" max="120"/>
+        </div>
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">Estilo</div>
+            <div class="btn-group w-100">
+                <button t-att-class="'btn btn-sm ' + (state.bold ? 'btn-primary' : 'btn-outline-secondary')" t-on-click="toggleBold" title="Negrita">
+                    <strong>B</strong>
+                </button>
+                <button t-att-class="'btn btn-sm ' + (state.italic ? 'btn-primary' : 'btn-outline-secondary')" t-on-click="toggleItalic" title="Cursiva">
+                    <em>I</em>
+                </button>
+            </div>
+        </div>
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">Alineación</div>
+            <div class="btn-group w-100">
+                <button t-att-class="'btn btn-sm ' + (state.textAlign === 'left' ? 'btn-primary' : 'btn-outline-secondary')" t-on-click="() => this.setTextAlign('left')">
+                    <i class="fa fa-align-left"/>
+                </button>
+                <button t-att-class="'btn btn-sm ' + (state.textAlign === 'center' ? 'btn-primary' : 'btn-outline-secondary')" t-on-click="() => this.setTextAlign('center')">
+                    <i class="fa fa-align-center"/>
+                </button>
+                <button t-att-class="'btn btn-sm ' + (state.textAlign === 'right' ? 'btn-primary' : 'btn-outline-secondary')" t-on-click="() => this.setTextAlign('right')">
+                    <i class="fa fa-align-right"/>
+                </button>
+            </div>
+        </div>
+        <div class="o_ld_prop_group mb-2">
+            <div class="o_ld_prop_label">Color de texto</div>
+            <div class="d-flex align-items-center gap-2">
+                <input type="color" class="o_ld_color_input" t-att-value="state.fill" t-on-input="(ev) => this.setFill(ev.target.value)"/>
+                <span class="text-muted" style="font-size:11px; font-family:monospace;">
+                    <t t-esc="state.fill"/>
+                </span>
+            </div>
+        </div>
+    </t>
+</t>
+
+<t t-name="print_label.design.rect_props">
+    <t t-if="state.selectedType === 'rect'">
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">Color de borde</div>
+            <div class="d-flex align-items-center gap-2">
+                <input type="color" class="o_ld_color_input" t-att-value="state.stroke" t-on-input="(ev) => this.setStroke(ev.target.value)"/>
+                <span class="text-muted" style="font-size:11px; font-family:monospace;">
+                    <t t-esc="state.stroke"/>
+                </span>
+            </div>
+        </div>
+        <div class="o_ld_prop_group mb-2">
+            <div class="o_ld_prop_label">Relleno</div>
+            <div class="d-flex align-items-center gap-2">
+                <input type="color" class="o_ld_color_input" t-att-value="state.shapeFill === 'transparent' ? '#ffffff' : state.shapeFill" t-on-input="(ev) => this.setShapeFill(ev.target.value)"/>
+                <button class="btn btn-sm btn-outline-secondary ms-auto" t-on-click="() => this.setShapeFill('transparent')"> Sin relleno </button>
+            </div>
+        </div>
+    </t>
+</t>
+
+<t t-name="print_label.design.barcode_props">
+    <t t-if="state.selected and state.selected.objectType === 'barcode'">
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">Tipo de código</div>
+            <select class="form-select form-select-sm" t-att-value="state.barcodeFormat" t-on-change="(ev) => this.setBarcodeFormat(ev.target.value)">
+                <option value="CODE128">Code 128</option>
+                <option value="EAN13">EAN-13</option>
+                <option value="EAN8">EAN-8</option>
+                <option value="UPC">UPC</option>
+                <option value="CODE39">Code 39</option>
+                <option value="ITF14">ITF-14</option>
+                <option value="QR">QR Code</option>
+            </select>
+        </div>
+    </t>
+</t>
+
+<t t-name="print_label.design.custom_expression_props">
+    <t t-if="state.selected and state.selected.customExpression !== undefined and state.selected.customExpression !== null">
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">
+                <i class="fa fa-code me-1"/>Expresión dinámica
+            </div>
+            <textarea class="form-control form-control-sm"
+                rows="3"
+                t-att-value="state.customExpression"
+                t-on-input="(ev) => this.setCustomExpression(ev.target.value)"
+                placeholder="ej: https://example.com/p/${id}"/>
+            <div class="text-muted mt-1" style="font-size:10px;">
+                Usa <code>${"${campo}"}</code> para insertar valores del producto.
+                Campos: id, name, barcode, default_code, list_price, categ_id, avg_cost
+            </div>
+        </div>
+    </t>
+</t>
+
+</templates>

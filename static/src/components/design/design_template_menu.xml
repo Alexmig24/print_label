@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="print_label.design.template_menu">
+    <div class="position-relative">
+        <button class="btn btn-sm btn-outline-secondary" t-on-click="toggleTemplateMenu">
+            <i class="fa fa-folder-open me-1"/>Plantillas
+            <i class="fa fa-caret-down ms-1"/>
+        </button>
+
+        <div t-if="state.showTemplateMenu"
+            class="o_tpl_dropdown position-absolute end-0 mt-1 bg-white border rounded shadow-lg"
+            style="width:300px; z-index:1050; max-height:400px; overflow-y:auto;">
+
+            <div class="p-2 border-bottom d-flex gap-1">
+                <button class="btn btn-sm btn-outline-primary flex-grow-1" t-on-click="newTemplate">
+                    <i class="fa fa-file-o me-1"/>Nueva
+                </button>
+                <button class="btn btn-sm btn-outline-secondary flex-grow-1" t-on-click="exportJSON">
+                    <i class="fa fa-download me-1"/>Exportar JSON
+                </button>
+            </div>
+
+            <div t-if="state.templates.length === 0" class="p-3 text-center text-muted small">
+                No hay plantillas guardadas
+            </div>
+
+            <t t-foreach="state.templates" t-as="tpl" t-key="tpl.id">
+                <div class="d-flex align-items-center px-2 py-2 border-bottom o_tpl_item"
+                    t-att-class="state.currentTemplateId === tpl.id ? 'bg-light' : ''">
+                    <div class="flex-grow-1 cursor-pointer" t-on-click="() => this.onLoadTemplate(tpl.id)">
+                        <div class="small fw-medium">
+                            <i t-if="state.currentTemplateId === tpl.id" class="fa fa-check text-success me-1"/>
+                            <t t-esc="tpl.name"/>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-1">
+                        <button class="btn btn-sm btn-link text-muted p-0 px-1"
+                            t-on-click="() => this.onRenameTemplate(tpl.id)"
+                            title="Renombrar">
+                            <i class="fa fa-pencil"/>
+                        </button>
+                        <button class="btn btn-sm btn-link text-danger p-0 px-1"
+                            t-on-click="() => this.onDeleteTemplate(tpl.id)"
+                            title="Eliminar">
+                            <i class="fa fa-trash"/>
+                        </button>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </div>
+</t>
+
+</templates>

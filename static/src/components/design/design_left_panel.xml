@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="print_label.design.left_panel">
+    <div class="border-end bg-white-75 p-3 overflow-auto mb-5" style="width:300px;">
+
+        <div class="text-uppercase small fw-bold text-secondary mb-2">
+            Campos del Producto
+        </div>
+
+        <p class="text-muted small mb-2">
+            Arrastra un campo al canvas
+        </p>
+
+        <div class="input-group input-group-sm mb-2">
+            <span class="input-group-text bg-white border-end-0">
+                <i class="fa fa-search text-muted"/>
+            </span>
+            <input type="text"
+                class="form-control border-start-0"
+                placeholder="Buscar campo…"
+                t-att-value="state.fieldSearch"
+                t-on-input="(ev) => this.state.fieldSearch = ev.target.value"/>
+        </div>
+
+        <div t-if="state.loadingFields" class="text-muted small text-center py-3">
+            <i class="fa fa-spinner fa-spin me-1"/>Cargando campos…
+        </div>
+
+        <div t-if="!state.loadingFields and filteredProductFields.length === 0"
+            class="text-muted small text-center py-2">
+            Sin resultados
+        </div>
+
+        <t t-foreach="filteredProductFields" t-as="field" t-key="field.key">
+            <div class="d-flex flex-column p-2 mb-1 border rounded small bg-white-25"
+                style="cursor:grab;"
+                draggable="true"
+                t-on-dragstart="(ev) => this.onDragStart(ev, field)">
+
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa fa-grip-vertical text-muted small"/>
+                    <span class="flex-grow-1 fw-medium text-dark">
+                        <t t-esc="field.label"/>
+                    </span>
+                    <span t-if="field.type === 'barcode'" class="badge bg-warning text-dark">
+                        <i class="fa fa-barcode"/>
+                    </span>
+                    <span t-else="" class="badge bg-info text-dark">T</span>
+                </div>
+
+                <div class="text-muted mt-1 ps-3"
+                    style="font-size:10px; white-space:nowrap;
+                           overflow:hidden; text-overflow:ellipsis;"
+                    t-att-title="field.placeholder">
+                    <t t-esc="field.placeholder"/>
+                </div>
+
+            </div>
+        </t>
+
+        <div class="border-top mt-3 pt-3">
+            <div class="text-uppercase small fw-bold text-secondary mb-2">
+                Campos Personalizados
+            </div>
+            <p class="text-muted small mb-2">
+                Campos con expresiones dinámicas (ej: <code>${"{id}"}</code>)
+            </p>
+            <div class="d-flex flex-column gap-1">
+                <button class="btn btn-sm btn-outline-primary w-100 text-start"
+                    t-on-click="addCustomText">
+                    <i class="fa fa-code me-1"/>Texto dinámico
+                </button>
+                <button class="btn btn-sm btn-outline-warning w-100 text-start"
+                    t-on-click="addCustomBarcode">
+                    <i class="fa fa-qrcode me-1"/>QR dinámico
+                </button>
+            </div>
+        </div>
+
+    </div>
+</t>
+
+</templates>

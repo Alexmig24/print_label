@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="print_label.design">
+        <div class="d-flex flex-column vh-100 bg-light">
+
+            <!-- ===== TOPBAR ===== -->
+            <t t-call="print_label.design.topbar"/>
+
+            <!-- ===== BODY ===== -->
+            <div class="d-flex flex-grow-1 overflow-hidden">
+
+                <!-- ===== LEFT PANEL ===== -->
+                <t t-call="print_label.design.left_panel"/>
+
+                <!-- ===== CANVAS ===== -->
+                <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center position-relative">
+
+                    <div class="small text-muted bg-white-25 px-3 py-1 rounded border mb-2">
+                        37 × 25 px
+                        <t t-if="state.selected">
+                            — <strong><t t-esc="state.posX/10"/>, <t t-esc="state.posY/10"/></strong>
+                        </t>
+                    </div>
+
+                    <div class="position-relative border shadow"
+                        t-att-class="state.isDraggingOver ? 'border-primary' : ''"
+                        t-on-dragover="onDragOver"
+                        t-on-dragleave="onDragLeave"
+                        t-on-drop="onDrop">
+
+                        <canvas t-ref="canvas" width="370" height="250"/>
+
+                        <div t-if="state.isDraggingOver"
+                            class="position-absolute top-0 start-0 w-100 h-100 d-flex flex-column align-items-center justify-content-center bg-primary bg-opacity-10 text-primary fw-bold">
+
+                            <i class="fa fa-plus-circle fa-2x mb-1"/>
+                            Suelta aquí
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ===== RIGHT PANEL ===== -->
+                <t t-call="print_label.design.right_panel"/>
+
+            </div>
+
+        </div>
+    </t>
+
+</templates>

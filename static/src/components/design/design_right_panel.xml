@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+<t t-name="print_label.design.right_panel">
+    <div class="border-start p-3 bg-white-75" style="width: 250px">
+        <div class="o_ld_section_title">Propiedades</div>
+        <!-- Empty state -->
+        <t t-if="!state.selected">
+            <div class="o_ld_empty_state">
+                <i class="fa fa-mouse-pointer fa-lg mb-2 d-block"/> Selecciona un elemento<br/>
+                o arrastra un campo al canvas </div>
+        </t>
+        <t t-if="state.selected">
+            <!-- Field binding badge -->
+            <t t-if="state.fieldKey">
+                <div class="o_ld_field_binding mb-3">
+                    <i class="fa fa-link me-1"/> Campo vinculado:
+                    <strong>
+                        <t t-esc="state.fieldKey"/>
+                    </strong>
+            </div>
+        </t>
+        <!-- Position -->
+        <div class="o_ld_prop_group mb-3">
+            <div class="o_ld_prop_label">Posición</div>
+            <div class="d-flex gap-2">
+                <div class="flex-grow-1">
+                    <label class="o_ld_input_label">X</label>
+                    <input type="number" class="form-control form-control-sm" t-att-value="state.posX" t-on-input="(ev) => this.setPosX(ev.target.value)"/>
+                </div>
+                <div class="flex-grow-1">
+                    <label class="o_ld_input_label">Y</label>
+                    <input type="number" class="form-control form-control-sm" t-att-value="state.posY" t-on-input="(ev) => this.setPosY(ev.target.value)"/>
+                </div>
+            </div>
+        </div>
+
+        <t t-call="print_label.design.text_props"/>
+        <t t-call="print_label.design.rect_props"/>
+        <t t-call="print_label.design.barcode_props"/>
+        <t t-call="print_label.design.custom_expression_props"/>
+    </t>
+    </div>
+</t>
+
+</templates>
