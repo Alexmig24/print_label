@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="default_label_template" model="print.label.template">
+            <field name="name">Plantilla por Defecto</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="json_data">{
+  "version": "5.3.0",
+  "background": "#ffffff",
+  "objects": [
+    {
+      "type": "IText",
+      "left": 185,
+      "top": 12,
+      "width": 200,
+      "height": 22,
+      "fill": "#000000",
+      "fontSize": 18,
+      "fontFamily": "Arial",
+      "fontWeight": "bold",
+      "textAlign": "center",
+      "originX": "left",
+      "originY": "top",
+      "scaleX": 1,
+      "scaleY": 1,
+      "text": "Nombre",
+      "fieldKey": "name"
+    },
+    {
+      "type": "IText",
+      "left": 185,
+      "top": 45,
+      "width": 200,
+      "height": 18,
+      "fill": "#000000",
+      "fontSize": 14,
+      "fontFamily": "Arial",
+      "textAlign": "center",
+      "originX": "left",
+      "originY": "top",
+      "scaleX": 1,
+      "scaleY": 1,
+      "text": "REF",
+      "fieldKey": "default_code"
+    },
+    {
+      "type": "Image",
+      "left": 45,
+      "top": 75,
+      "width": 280,
+      "height": 70,
+      "scaleX": 1,
+      "scaleY": 1,
+      "originX": "left",
+      "originY": "top",
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkAAIAAAoAAv/lxKUAAAAASUVORK5CYII=",
+      "objectType": "barcode",
+      "barcodeFormat": "CODE128",
+      "fieldKey": "barcode"
+    },
+    {
+      "type": "IText",
+      "left": 185,
+      "top": 200,
+      "width": 200,
+      "height": 22,
+      "fill": "#000000",
+      "fontSize": 18,
+      "fontFamily": "Arial",
+      "fontWeight": "bold",
+      "textAlign": "center",
+      "originX": "left",
+      "originY": "top",
+      "scaleX": 1,
+      "scaleY": 1,
+      "text": "0.00",
+      "fieldKey": "list_price"
+    }
+  ]
+}</field>
+        </record>
+    </data>
+</odoo>
