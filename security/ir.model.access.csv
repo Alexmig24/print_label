@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_print_label_user,ome.print.label,model_ome_print_label,group_access_print_label_menu,1,1,1,1
+access_print_label_config,print.label.config,model_print_label_config,group_access_print_label_menu,1,1,1,0
+access_print_label_template,print.label.template,model_print_label_template,group_access_print_label_menu,1,1,1,1

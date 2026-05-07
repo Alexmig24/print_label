@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="res.groups.privilege" id="res_groups_privilege_print_labels">
+        <field name="name">Imprimir Etiquetas</field>
+        <field name="sequence">10</field>
+        <field name="category_id" ref="base.module_category_productivity"/>
+    </record>
+    <!-- Opcion con acceso -->
+    <record id="group_access_print_label_menu" model="res.groups">
+        <field name="name">Acceso al menu</field>
+        <field name="privilege_id" ref="res_groups_privilege_print_labels"/>
+        <field name="comment">Permite ver y acceder al menu de Imprimir Etiquetas.</field>
+    </record>
+    <!-- Opcion sin acceso -->
+    <record id="group_no_access_print_label_menu" model="res.groups">
+        <field name="name">Sin Acceso</field>
+        <field name="privilege_id" ref="res_groups_privilege_print_labels"/>
+        <field name="comment">Sin acceso al menu de Imprimir Etiquetas.</field>
+    </record>
+
+    <!-- Administradores siempre tienen activo -->
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('group_access_print_label_menu'))]"/>
+    </record>
+</odoo>
