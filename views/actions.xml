@@ -1,0 +1,13 @@
+<odoo>
+    <record id="action_submenu_list_products" model="ir.actions.client">
+        <field name="name">Lista de Productos</field>
+        <field name="tag">print_label.list_products</field>
+        <field name="path">print-label</field>
+    </record>
+
+    <record id="action_submenu_design" model="ir.actions.client">
+        <field name="name">Diseñar</field>
+        <field name="tag">print_label.design</field>
+        <field name="path">design-label</field>
+    </record>
+</odoo>

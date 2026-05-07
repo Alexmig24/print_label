@@ -1,0 +1,19 @@
+<odoo>
+    <!-- Menu en las APPS -->
+    <menuitem id="menu_print_label"
+              name="Imprimir Etiquetas"
+              web_icon="print_label,static/description/icon.png"
+              sequence="10"/>
+    <!-- Submenu de las etiquetas -->
+    <menuitem id="submenu_list_products"
+              name="Lista de Productos"
+              parent="menu_print_label"
+              sequence="10"
+              action="action_submenu_list_products"/>
+    <!-- Submenu del diseño -->
+    <menuitem id="submenu_design"
+              name="Diseñar Etiquetas"
+              parent="menu_print_label"
+              sequence="11"
+              action="action_submenu_design"/>
+</odoo>
