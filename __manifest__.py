@@ -1,12 +1,12 @@
 {
     'name': 'Imprimir Etiquetas',
-    'version': '19.0.1.0.0',
+    'version': '19.0.0.0',
     'category': 'Products',
     'description': '''
-        Permite la impresion de las etiquetas de los productos en formato PDF.
+        Permite el diseño de la plantilla y la impresion de las etiquetas relacionadas a los productos.
     ''',
-    'author': 'Grupo 8',
-    'license': 'OPL-1',
+    'author': 'Grupo 6 - Arquitectura de Software',
+    'license': 'AGPL-3',
     'depends': ['web', 'product', 'stock'],
     'data': [
         'security/security.xml',
