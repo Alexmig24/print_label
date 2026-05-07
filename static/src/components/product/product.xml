@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="print_label.Product" t-props="props">
+        <div class="card h-100 shadow-sm product"
+                t-att-class="{'product_selected': props.productSelected}">
+            <div class="cursor-pointer h-100">
+                <div class="d-flex justify-content-center product_img_bg" 
+                    t-att-class="{'product_selected_img_bg': props.productSelected}"
+                    style="height: 150px; overflow: hidden;">
+                    <img t-att-src="getImageUrl(props.product)" 
+                        t-att-alt="props.product.name"
+                        class="img-fluid"
+                        style="max-height: 100%; max-width: 100%; object-fit: contain;"/>
+                </div>
+                
+                <div class="d-flex flex-column justify-content-between py-2 px-3">
+                    <div class="d-flex flex-column gap-1">
+                        <h6 class="card-title text-truncate" t-att-title="props.product.name">
+                            <t t-esc="props.product.name"/>
+                        </h6>
+                        
+                        <div class="text-muted small" t-if="props.product.default_code">
+                            [<t t-esc="props.product.default_code"/>]
+                        </div>
+
+                        <div class="text-muted small" t-if="props.product.codeWholesalePrice">
+                            COD: <t t-esc="props.product.codeWholesalePrice"/>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between align-items-center text-muted small">
+                            <div class="">
+                                Precio: $ <t t-esc="formatPrice(props.product.list_price)"/>
+                            </div>
+                            <span class="">
+                                Stock: <t t-esc="Math.floor(props.product.qty_available)"/>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="d-flex gap-2 align-items-center"
+                                t-if="props.productSelected">
+                            <span class="badge text-bg-primary rounded" t-on-click.stop="toggleTypePrint">
+                                <t t-esc="typePrint"/>
+                            </span>
+                            <input type="number"
+                                    t-ref="toPrint"
+                                    min="1"
+                                    class="text-center"
+                                    t-att-value="props.productSelected.to_print || 1"
+                                    t-on-input="(ev) => this.onRowsChange(ev)"
+                                    t-on-click.stop=""/>
+                        </div>
+                        <div class="text-center fw-bold small pb-2"
+                             style="color: #409ea2;"
+                             t-else="">
+                            Seleccionar producto
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </t>
+</templates>
