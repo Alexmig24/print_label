@@ -6,12 +6,12 @@ class ResConfigSettings(models.TransientModel):
 
     print_label_pricelist = fields.Many2one(
         'product.pricelist',
-        string="Lista de Precio"
+        string="Lista de Precio para Etiquetas"
     )
 
     print_label_template_id = fields.Many2one(
         'print.label.template',
-        string="Plantilla de Etiqueta"
+        string="Plantilla de Etiquetas"
     )
 
     def _get_print_label_config(self):

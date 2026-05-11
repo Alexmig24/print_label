@@ -2,7 +2,7 @@ from odoo import fields, models, api
 
 class PrintLabelConfig(models.Model):
     _name = "print.label.config"
-    _description = "Configuracion de PrintLabel"
+    _description = "Configuracion de PrintLabel para cada compañia"
     _rec_name = "company_id"
 
     company_id = fields.Many2one(

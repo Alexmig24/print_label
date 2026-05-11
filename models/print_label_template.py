@@ -3,7 +3,7 @@ from odoo import models, fields
 
 class PrintLabelTemplate(models.Model):
     _name = "print.label.template"
-    _description = "Plantilla de etiqueta"
+    _description = "Plantilla de etiqueta para impresión"
     _order = "write_date desc"
 
     name = fields.Char(string="Nombre", required=True)
